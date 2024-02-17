@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .main{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+        }
+        #caixa{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 200px;
+            height: 200px;
+            background: green;
+            /* background: linear-gradient(45deg, rgb(32, 163, 32), rgb(124, 196, 124)); */
+            border-radius: 2rem;
+        }
+        #caixa h1{
+            font-size: 14px;
+            font-weight: normal;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: white;
+            padding: 5%;
+        }
+    </style>
+</head>
+<body>
+    <section class="main">
+        <div id="caixa">
+            <h1>Clique Aqui</h1>
+        </div>
+    </section>
+    
+    
+    <script>
+        var caixa = window.document.getElementById('caixa');
+
+            caixa.addEventListener('click', clicar)
+            caixa.addEventListener('mouseenter', entrar)
+            caixa.addEventListener('mouseout', sair)
+
+            function clicar(){
+                caixa.innerHTML = '<h1>Clicado!</h1>'
+                caixa.style.background = 'darkgreen'
+            }
+            function entrar(){
+                caixa.innerHTML = '<h1 style="color: black">Entrou!</h1>'
+                caixa.style.background = 'yellow'
+            }
+            function sair(){
+                caixa.innerHTML = '<h1>Saiu!</h1>'
+                caixa.style.background = 'red'
+            }
+    </script>
+</body>
+</html>

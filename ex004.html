@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idade</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+        * {
+            font-family: Roboto;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            height: 100vh;
+            background: #161616;
+        }
+        header{
+            padding-bottom: 2%;
+            font-size: 28px;
+            color: white;
+        }
+        .big-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            width: 800px;
+            height: 600px;
+            background: white;
+            border-radius: 4rem;
+        }
+        .birthday-box{
+            display: flex;
+            /* background: red; */
+            width: 300px;
+            height: 500px;
+            flex-direction: column;
+        }
+        .birthday-box #birthday{
+            border: none;
+            padding: 5%;
+            width: 19rem;
+            height: 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 0 2rem rgba(0, 0, 0, 0.25);
+            background-color: #fff;
+        }
+        .birthday-date{
+            font-size: 20px;
+            margin-bottom: 2.5%;
+        }
+        .gender{
+            margin-top: 5%;
+            margin-bottom: 2.5%;
+            font-size: 20px;
+        }
+        .radiobuttons{
+            display: flex;
+            flex-direction: column;
+        }
+        #verify{
+            border: none;
+            background: black;
+            color: white;
+            margin-top: 10%;
+            padding: 5%;
+            border-radius: 5rem;
+            width: 50%;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-size: 10px;
+            font-weight: bold;
+            transition: .8s;
+            cursor: pointer;
+        }
+        #verify:hover{
+            transition: .8s;
+            transform: scale(0.95);
+            color: black;
+            background: white;
+            box-shadow: 0 0 2rem rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+        #result{
+            margin-top: 10%;
+            text-align: center;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        #person-img{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 200px;
+            height: 200px;
+            max-width: 256px;
+            max-height: 256px;
+            border-radius: 50rem;
+            margin-top: 2%;
+            margin-left: 19%;
+            transition: .50s;
+        }
+    </style>
+</head>
+<body>
+    <header>Verificador de Idade</header>
+    <section class="big-container">
+        <div class="birthday-box">
+            <span class="birthday-date">Ano de nascimento</span>
+            <input type="number" id="birthday">
+            <span class="gender">Sexo</span>
+            
+            
+            <div class="radiobuttons">
+                <input type="radio" id="male" name="options" value="male">
+                <label for="male">Masculino</label><br>
+                <input type="radio" id="female" name="options" value="female">
+                <label for="female">Feminino</label><br>
+            </div>
+            <input type="button" id="verify" value="Verificar">
+
+            <h1 id="result"></h1>
+            <img src="img/adolescente_masc.jpg" alt="" id="person-img">
+        </div>
+    </section>
+
+    <script>
+        var verifyButton = window.document.getElementById("verify")
+        var resultText = window.document.getElementById("result")
+
+        var male = window.document.getElementById("male")
+        var female = window.document.getElementById("female")
+
+        var personImg = window.document.getElementById('person-img')
+
+        var check_birthday, check_sex = false
+
+        verifyButton.addEventListener('click', resultado)
+
+        function resultado(){
+            var sexo = 0
+            if (male.checked == false && female.checked == true){
+                sexo = 'Mulher'
+                check_sex = true
+            }
+            else if (male.checked == true && female.checked == false){
+                sexo = 'Masculino'
+                check_sex = true
+            }
+            else if (male.checked == false && female.checked == false){
+                alert('Por favor, insira um sexo!')
+            }
+
+            var birthday = window.document.getElementById("birthday").value
+            var dataAtual = new Date()
+            var ano = dataAtual.getFullYear()
+            var idade = 0
+
+            if (birthday > ano){
+                alert('O ano de nascimento não pode ser maior que o ano atual!')
+            }
+            else if (birthday == null || birthday == "") {
+                alert('Insira um ano de nascimento válido!')
+            }
+            else if (birthday < 0){
+                alert('O ano de nascimento não pode ser negativo!')
+            }
+            else if (birthday <= ano){
+                idade = ano - birthday
+                check_birthday = true
+            }
+
+            var imgNumber = 0
+            var imgName = ''
+            var imgPath = ''
+
+            if (idade >= 0 && idade <= 12){
+                imgNumber = 1
+            }
+            else if (idade > 12 && idade < 18){
+                imgNumber = 2
+            }
+            else if (idade >= 18 && idade <= 24){
+                imgNumber = 3
+            }
+            else if (idade > 24 && idade < 60){
+                imgNumber = 4
+            }
+            else if (idade > 60){
+                imgNumber = 5
+            }
+
+            if (imgNumber == 1){
+                if (sexo != 'Masculino'){
+                    imgName = 'Criança'
+                    imgPath = 'crianca_fem'
+                }
+                else if (sexo != 'Feminino'){
+                    imgName = 'Criança'
+                    imgPath = 'crianca_masc'
+                }
+            }
+            else if (imgNumber == 2){
+                if (sexo != 'Masculino'){
+                    imgName = 'Adolescente'
+                    imgPath = 'adolescente_fem'
+                }
+                else if (sexo != 'Feminino'){
+                    imgName = 'Adolescente'
+                    imgPath = 'adolescente_masc'
+                }
+            }
+            else if (imgNumber == 3){
+                if (sexo != 'Masculino'){
+                    imgName = 'Jovem Adulto'
+                    imgPath = 'jovem_adulto-fem'
+                }
+                else if (sexo != 'Feminino'){
+                    imgName = 'Jovem Adulto'
+                    imgPath = 'jovem_adulto-masc'
+                }
+            }
+            else if (imgNumber == 4){
+                if (sexo != 'Masculino'){
+                    imgName = 'Adulto'
+                    imgPath = 'adulto_fem'
+                }
+                else if (sexo != 'Feminino'){
+                    imgName = 'Adulto'
+                    imgPath = 'adulto_masc'
+                }
+            }
+            else if (imgNumber == 5){
+                if (sexo != 'Masculino'){
+                    imgName = 'Idoso'
+                    imgPath = 'idoso_fem'
+                }
+                else if (sexo != 'Feminino'){
+                    imgName = 'Idoso'
+                    imgPath = 'idoso_masc'
+                }
+            }
+
+            if (check_sex == true && check_birthday == true){
+                resultText.innerHTML = `${imgName} com ${idade} anos de idade!`
+                resultText.style.color = 'black'
+                personImg.src = `img/${imgPath}.jpg`
+                personImg.alt = `${imgName}`
+                console.log(`OUTPUT CHECK SEX:\n<img src="img/${imgPath}.jpg" alt="${imgName}" id="person-img">`)
+            }
+            else if ((check_sex && check_birthday) != true){
+                resultText.style.color = "red"
+                resultText.innerHTML = `Erro ao validar, verifique todos os campos!`
+            }
+        }
+        
+    </script>
+</body>
+</html>
