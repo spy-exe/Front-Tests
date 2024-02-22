@@ -121,6 +121,117 @@
             position: end;
             color: rgb(94, 255, 0);
         }
+        @media screen and (max-width: 768px){
+            body{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100vh;
+                background: #1e1f20;
+            }
+            .main-title{
+                color: white;
+                font-size: 2rem;
+                
+            }
+            .container{
+                /* display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: row; */
+                background: #f5f5f5;
+                width: 300px;
+                height: 500px;
+                border-radius: 2rem;
+            }
+
+            .mini-container-1{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-weight: bold;
+                /* background-color: rgb(48, 65, 80); */
+            }
+
+            #characters-number{
+                border: none;
+                padding: 5%;
+                border-radius: 1rem;
+                margin-left: 5%;
+                height: 5vh;
+                box-shadow: 0 0 1rem rgba(0, 0, 0, 0.15);
+                transition: .8s;
+            }
+
+            #characters-number:hover{
+                cursor: pointer;
+                transition: .8s;
+                box-shadow: 0 0 1rem rgb(78, 105, 36);
+                color: greenyellow;
+                background-color: #212325;
+            }
+
+            .mini-container-2{
+                display: flex;
+                width: 100%;
+                flex-direction: column;
+                padding: 5%;
+                height: 10vh;
+                margin-top: 5%;
+                /* background-color: blanchedalmond; */
+            }
+
+            #generate-btn{
+                background: transparent;
+                width: 10rem;
+                height: 5vh;
+                border-radius: 2rem;
+                border: solid 1px black;
+                margin-top: 25%;
+                margin-left: 25%;
+                transition: .80s;
+                cursor: pointer;
+            }
+            #generate-btn:hover{
+                background-color: black;
+                color: greenyellow;
+                transform: scale(95%);
+                box-shadow: 0 0 1rem rgba(0, 0, 0, 0.13);
+                cursor: pointer;
+                transition: .80s;
+            }
+            #result{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                margin-top: 25%;
+                font-size: 32px;
+                font-weight: bold;
+            }
+            
+            .number-text, .symbol-text, .upper-text, .lower-text{
+                font-size: 16px;
+            }
+            #passwd-msg{
+                margin-left: 33%;
+                color: green;
+            }
+            footer{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 5vh;
+                background-color: rgba(45, 255, 45, 0.1);
+                margin-top: 10%;
+                position: end;
+                font-size: 12px;
+                color: rgb(94, 255, 0);
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -132,18 +243,18 @@
         </div>
         
         <div class="mini-container-2">
-            <span>Incluir Simbolos</span>
+            <span class="symbol-text">Simbolos</span>
             <input type="checkbox" name="symbols" id="include-symbols">
-            <span>Incluir Números</span>
+            <span class="number-text">Números</span>
             <input type="checkbox" name="numbers" id="include-numbers">
-            <span>Incluir Letras Maiúsculas</span>
+            <span class="upper-text">Letras Maiúsculas</span>
             <input type="checkbox" name="letters" id="include-upper-letters">
-            <span>Incluir Letras Minúsculas</span>
+            <span class="lower-text">Letras Minúsculas</span>
             <input type="checkbox" name="letters" id="include-lower-letters">    
         </div>
 
         <input type="button" name="button" id="generate-btn" value="Gerar Senha">
-        <span id="passwd-msg"></span>
+        <br><span id="passwd-msg">senha gerada!</span>
         <span id="result"></span>
     </div>
     <footer><strong>Ricardo Figueiredo</strong> | Todos os direitos reservados &copy; 2024</footer>
@@ -185,6 +296,7 @@ function generatePassword(charactersNumber, includeSymbols, includeNumbers, incl
     console.log(`upperLettersList = ${upperLettersList}\n
     lowerLettersList = ${lowerLettersList}`)
 
+
     if(charactersNumber > 32){
         alert(`O numero de caracteres nao pode ultrapassar de 32!
         \nQuantidade inserida: ${charactersNumber}`)
@@ -194,6 +306,9 @@ function generatePassword(charactersNumber, includeSymbols, includeNumbers, incl
         alert(`A senha deve ter no minimo 6 caracteres!
          \nQuantidade inserida: ${charactersNumber}`)
         // console.log(`OUTPUT - charactersNumber: ${charactersNumber}`)   
+    }
+    else if(includeSymbols == false && includeNumbers == false && includeUpperLetters == false && includeLowerLetters == false){
+        alert('Você selecionar ao menos uma opção!')
     }
     else {
         for(var i = 0; i < charactersNumber; i++){
